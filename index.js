@@ -42,9 +42,12 @@ filter.year = {$eq:year}
   const finalValue = search ? searchObj : filter
   
   try {
-    const movies = await MovieModel.find(finalValue).skip(skipNum).limit(limitNum)
 
-    res.status(200).json({movies,skip:skipNum*1,limit:limitNum*1,total:movies.length})
+    const totalMovies = await MovieModel.find(finalValue)
+
+    const movies = total.skip(skipNum).limit(limitNum)
+
+    res.status(200).json({movies,skip:skipNum*1,limit:limitNum*1,total:totalMovies*1})
   }
   catch {
     res.status(500).json({error:"failed to get movies"})
