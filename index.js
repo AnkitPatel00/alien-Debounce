@@ -45,7 +45,7 @@ filter.year = {$eq:year}
 
     const totalMovies = await MovieModel.find(finalValue)
 
-    const movies = MovieModel.find(finalValue).skip(skipNum).limit(limitNum)
+    const movies =await MovieModel.find(finalValue).skip(skipNum).limit(limitNum)
 
     res.status(200).json({movies,skip:skipNum*1,limit:limitNum*1,total:totalMovies*1})
   }
