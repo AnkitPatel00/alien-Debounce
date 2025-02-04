@@ -14,7 +14,7 @@ initializeDatabase()
 //3. Find Movies by relase Year more then 2015
 
 app.get("/api/movies/excercise1", async (req, res) => {
-  const {search, year, filterOutGenre, minYear,skip,limit } = req.query
+  const {search, year,genre,filterOutGenre, minYear,skip,limit } = req.query
   
  const skipNum = skip || 0
  const limitNum = limit || 5
@@ -37,6 +37,10 @@ filter.year = {$eq:year}
   if (minYear)
   {
     filter.year = {$gte:minYear}
+  }
+  if (genre)
+  {
+    filter.genre = {$regex:genre,$options:"i"}
   }
 
   const finalValue = search ? searchObj : filter
