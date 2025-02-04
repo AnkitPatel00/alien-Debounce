@@ -40,16 +40,16 @@ filter.year = {$eq:year}
   }
   if (genre)
   {
-    filter.genre = {$regex:genre,$options:"i"}
+    filter.genre = {$in:genre}
   }
 
   const finalValue = search ? searchObj : filter
+
+  console.log(filter)
   
   try {
 
     const totalMovies = await MovieModel.find(finalValue)
-
-    console.log(totalMovies.length)
 
     const movies =await MovieModel.find(finalValue).skip(skipNum).limit(limitNum)
 
